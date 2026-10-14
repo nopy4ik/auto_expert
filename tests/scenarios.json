@@ -1,0 +1,22 @@
+[
+ {"id":1,"name":"Стартер молчит и панель гаснет","category":"start","answers":{"starter":"none","dashboard_off":true,"click":false,"brightness_same":false},"expected":[3],"status":"matched"},
+ {"id":2,"name":"Стартер щёлкает при неизменной яркости","category":"start","answers":{"starter":"none","dashboard_off":false,"click":true,"brightness_same":true},"expected":[4],"status":"matched"},
+ {"id":3,"name":"Медленное вращение стартера","category":"start","answers":{"starter":"slow"},"expected":[5],"status":"matched"},
+ {"id":4,"name":"Неизвестно поведение стартера","category":"start","answers":{"starter":null},"expected":[],"status":"insufficient"},
+ {"id":5,"name":"Колебания оборотов только на холостом ходу","category":"rough","answers":{"idle_only":true,"rpm_fluctuates":true,"gas_smooths":true,"check_flashes":false,"stable_rpm":false,"body_vibration":false,"after_refuel":false},"expected":[9],"status":"matched"},
+ {"id":6,"name":"Остановка двигателя после запуска с индикатором ключа","category":"stall","answers":{"release_gas":false,"brake_stall":false,"soon_start":true,"key_flashes":true,"moving_stall":false,"panel_power_lost":false},"expected":[16],"status":"matched"},
+ {"id":7,"name":"Сизый дым и снижение уровня масла","category":"exhaust","answers":{"smoke_color":"blue","oil_drops":true},"expected":[21],"status":"matched"},
+ {"id":8,"name":"Белый пар исчезает после прогрева","category":"exhaust","answers":{"smoke_color":"white","white_persists":false,"coolant_drops":false,"cold_disappears":true},"expected":[24],"status":"matched"},
+ {"id":9,"name":"Перегрев в пробке без слышимой работы вентилятора","category":"heat","answers":{"traffic_only":true,"fan_heard":false,"coolant_traces":false,"heater_cold":false,"heat_both":false},"expected":[27],"status":"matched"},
+ {"id":10,"name":"Пробуксовка сцепления на механической коробке","category":"transmission","answers":{"manual":true,"rpm_no_speed":true,"start_jerks":false,"gears_hard_running":false,"clutch_noise":false,"gear_pops":false},"expected":[32],"status":"matched"},
+ {"id":11,"name":"Автоматическая коробка вне области ветви","category":"transmission","answers":{"manual":false},"expected":[],"status":"no_match"},
+ {"id":12,"name":"Увод при разном давлении в шинах","category":"vibration","answers":{"speed_band":false,"after_pothole":false,"pulls":true,"pressure":"different","wheel_crooked":false,"accel_vibration":false},"expected":[40],"status":"matched"},
+ {"id":13,"name":"Гул со скоростью и изменением при повороте","category":"noise","answers":{"turn_clicks":false,"hum_changes":true,"bumps_knock":false,"long_sway":false,"small_bumps":false,"stationary_squeak":false},"expected":[45],"status":"matched"},
+ {"id":14,"name":"Металлический скрежет при торможении","category":"brakes","answers":{"grinding":true,"brake_vibration":false,"soft_pedal":false,"pedal_sinks":false,"brake_pull":false},"expected":[50],"status":"matched"},
+ {"id":15,"name":"Несколько гипотез для тормозной системы","category":"brakes","answers":{"grinding":false,"brake_vibration":false,"soft_pedal":true,"pedal_sinks":true,"brake_pull":false},"expected":[52,53],"status":"matched"},
+ {"id":16,"name":"Тормозные признаки не совпали с правилами","category":"brakes","answers":{"grinding":false,"brake_vibration":false,"soft_pedal":false,"pedal_sinks":false,"brake_pull":false},"expected":[],"status":"no_match"},
+ {"id":17,"name":"После запуска горит лампа аккумулятора","category":"electric","answers":{"battery_lamp":true,"park_discharge":false,"dim_slow":false,"one_headlight":false,"several_devices":false},"expected":[56],"status":"matched"},
+ {"id":18,"name":"Неизвестно, опускается ли педаль тормоза","category":"brakes","answers":{"grinding":false,"brake_vibration":false,"soft_pedal":false,"pedal_sinks":null,"brake_pull":false},"expected":[],"status":"insufficient"},
+ {"id":19,"name":"Нормальное вращение без дополнительного признака","category":"start","answers":{"starter":"normal","after_empty_refuel":false},"expected":[],"status":"no_match"},
+ {"id":20,"name":"Одна фара не работает","category":"electric","answers":{"battery_lamp":false,"park_discharge":false,"dim_slow":false,"one_headlight":true,"several_devices":false},"expected":[59],"status":"matched"}
+]

@@ -1,0 +1,2626 @@
+{
+  "version": "1.0",
+  "scope": "Предварительное выявление возможных неисправностей по наблюдаемым признакам",
+  "categories": [
+    {
+      "id": "start",
+      "title": "Двигатель не запускается",
+      "description": "Не заводится, стартер молчит или крутит медленно"
+    },
+    {
+      "id": "rough",
+      "title": "Двигатель работает неровно",
+      "description": "Плавают обороты, двигатель трясётся или троит"
+    },
+    {
+      "id": "stall",
+      "title": "Двигатель глохнет",
+      "description": "Останавливается после запуска, на ходу или на холостых"
+    },
+    {
+      "id": "exhaust",
+      "title": "Необычный дым или пар",
+      "description": "Из выхлопной трубы идёт дым или заметный белый пар"
+    },
+    {
+      "id": "heat",
+      "title": "Двигатель перегревается",
+      "description": "Температура в красной зоне или горит индикатор перегрева"
+    },
+    {
+      "id": "transmission",
+      "title": "Сцепление или передачи",
+      "description": "Проблемы с троганием и переключением на механической коробке"
+    },
+    {
+      "id": "vibration",
+      "title": "Вибрация или увод в сторону",
+      "description": "Вибрирует руль или автомобиль тянет в сторону"
+    },
+    {
+      "id": "noise",
+      "title": "Шумы со стороны колёс",
+      "description": "Стук на неровностях, гул или щелчки при повороте"
+    },
+    {
+      "id": "brakes",
+      "title": "Проблемы при торможении",
+      "description": "Шум, вибрация, увод или необычный ход педали"
+    },
+    {
+      "id": "electric",
+      "title": "Электрика и аккумулятор",
+      "description": "Проблемы с зарядкой, освещением или электроприборами"
+    }
+  ],
+  "questions": [
+    {
+      "id": "starter",
+      "category": "start",
+      "text": "Как стартер вращает двигатель при попытке запуска?",
+      "hint": "Ориентируйтесь на привычный звук запуска. Не вращается — обычного звука прокручивания двигателя нет.",
+      "priority": 1,
+      "options": [
+        {
+          "value": "none",
+          "label": "Не вращается"
+        },
+        {
+          "value": "slow",
+          "label": "Вращается медленно"
+        },
+        {
+          "value": "normal",
+          "label": "Вращается как обычно"
+        }
+      ]
+    },
+    {
+      "id": "dashboard_off",
+      "category": "start",
+      "text": "При попытке запуска приборная панель гаснет?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 2,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "starter",
+        "eq": "none"
+      }
+    },
+    {
+      "id": "click",
+      "category": "start",
+      "text": "При попытке запуска слышен щелчок?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 3,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "starter",
+        "eq": "none"
+      }
+    },
+    {
+      "id": "brightness_same",
+      "category": "start",
+      "text": "Яркость приборной панели почти не меняется?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 4,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "starter",
+        "eq": "none"
+      }
+    },
+    {
+      "id": "after_empty_refuel",
+      "category": "start",
+      "text": "Проблема сохраняется после заправки ранее пустого бака?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 5,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "starter",
+        "eq": "normal"
+      }
+    },
+    {
+      "id": "idle_only",
+      "category": "rough",
+      "text": "Неровная работа возникает только на холостом ходу?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 1,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "rpm_fluctuates",
+      "category": "rough",
+      "text": "Обороты на холостом ходу колеблются?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 2,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "idle_only",
+        "eq": true
+      }
+    },
+    {
+      "id": "gas_smooths",
+      "category": "rough",
+      "text": "При нажатии на газ двигатель работает ровнее?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 3,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "idle_only",
+        "eq": true
+      }
+    },
+    {
+      "id": "check_flashes",
+      "category": "rough",
+      "text": "Во время неровной работы мигает Check Engine?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 4,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "stable_rpm",
+      "category": "rough",
+      "text": "Обороты держатся ровно?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 5,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "body_vibration",
+      "category": "rough",
+      "text": "На месте кузов сильно вибрирует?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 6,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "after_refuel",
+      "category": "rough",
+      "text": "Неровная работа появилась сразу после заправки?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 7,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "release_gas",
+      "category": "stall",
+      "text": "Двигатель глохнет при отпускании педали газа?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 1,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "brake_stall",
+      "category": "stall",
+      "text": "Двигатель глохнет при нажатии на тормоз?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 2,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "hiss",
+      "category": "stall",
+      "text": "При этом слышно шипение?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 3,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "brake_stall",
+        "eq": true
+      }
+    },
+    {
+      "id": "soon_start",
+      "category": "stall",
+      "text": "Двигатель глохнет вскоре после запуска?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 4,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "key_flashes",
+      "category": "stall",
+      "text": "При этом мигает индикатор ключа?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 5,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "soon_start",
+        "eq": true
+      }
+    },
+    {
+      "id": "moving_stall",
+      "category": "stall",
+      "text": "Двигатель глохнет во время движения?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 6,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "loses_power_jerks",
+      "category": "stall",
+      "text": "Перед остановкой двигатель теряет мощность и автомобиль дёргается?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 7,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "moving_stall",
+        "eq": true
+      }
+    },
+    {
+      "id": "panel_power_lost",
+      "category": "stall",
+      "text": "Вместе с остановкой двигателя пропадает питание приборной панели?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 8,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "smoke_color",
+      "category": "exhaust",
+      "text": "Какого цвета дым или пар?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 1,
+      "options": [
+        {
+          "value": "blue",
+          "label": "Сизый / синеватый"
+        },
+        {
+          "value": "black",
+          "label": "Чёрный"
+        },
+        {
+          "value": "white",
+          "label": "Белый"
+        }
+      ]
+    },
+    {
+      "id": "oil_drops",
+      "category": "exhaust",
+      "text": "Вы уже замечали, что уровень масла регулярно снижается?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 2,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "smoke_color",
+        "eq": "blue"
+      }
+    },
+    {
+      "id": "fuel_increased",
+      "category": "exhaust",
+      "text": "Расход топлива стал выше обычного?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 3,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "smoke_color",
+        "eq": "black"
+      }
+    },
+    {
+      "id": "white_persists",
+      "category": "exhaust",
+      "text": "Густой белый дым сохраняется после прогрева?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 4,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "smoke_color",
+        "eq": "white"
+      }
+    },
+    {
+      "id": "coolant_drops",
+      "category": "exhaust",
+      "text": "Вы уже замечали снижение уровня охлаждающей жидкости?",
+      "hint": "Отвечайте, только если это уже известно. Не открывайте крышку горячей системы охлаждения.",
+      "priority": 5,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "smoke_color",
+        "eq": "white"
+      }
+    },
+    {
+      "id": "cold_disappears",
+      "category": "exhaust",
+      "text": "Белый пар появляется только на холодном двигателе и исчезает после прогрева?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 6,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "smoke_color",
+        "eq": "white"
+      }
+    },
+    {
+      "id": "traffic_only",
+      "category": "heat",
+      "text": "Перегрев возникает преимущественно в пробке?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 1,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "fan_heard",
+      "category": "heat",
+      "text": "Вы слышали работу вентилятора охлаждения при перегреве?",
+      "hint": "Используйте только уже известные наблюдения. Если работу вентилятора не различаете, выберите «Не знаю».",
+      "priority": 2,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "coolant_traces",
+      "category": "heat",
+      "text": "Под автомобилем замечены следы охлаждающей жидкости?",
+      "hint": "Если не можете отличить охлаждающую жидкость от воды или другой жидкости, выберите «Не знаю».",
+      "priority": 3,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "heater_cold",
+      "category": "heat",
+      "text": "При росте температуры отопитель внезапно начал дуть холодным воздухом?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 4,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "heat_both",
+      "category": "heat",
+      "text": "Перегрев возникает и в пробке, и при движении?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 5,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "manual",
+      "category": "transmission",
+      "text": "На автомобиле механическая коробка передач?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 1,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "rpm_no_speed",
+      "category": "transmission",
+      "text": "При разгоне обороты растут, а скорость почти не увеличивается?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 2,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "all": [
+          {
+            "field": "manual",
+            "eq": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "start_jerks",
+      "category": "transmission",
+      "text": "При трогании автомобиль дёргается?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 3,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "all": [
+          {
+            "field": "manual",
+            "eq": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "engine_smooth",
+      "category": "transmission",
+      "text": "При этом двигатель работает ровно?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 4,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "all": [
+          {
+            "field": "manual",
+            "eq": true
+          },
+          {
+            "field": "start_jerks",
+            "eq": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "gears_hard_running",
+      "category": "transmission",
+      "text": "При работающем двигателе передачи включаются трудно?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 5,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "all": [
+          {
+            "field": "manual",
+            "eq": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "gears_easy_off",
+      "category": "transmission",
+      "text": "При заглушённом двигателе передачи включаются легко?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 6,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "all": [
+          {
+            "field": "manual",
+            "eq": true
+          },
+          {
+            "field": "gears_hard_running",
+            "eq": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "clutch_noise",
+      "category": "transmission",
+      "text": "Шум появляется при нажатии сцепления и исчезает после отпускания?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 7,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "all": [
+          {
+            "field": "manual",
+            "eq": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "gear_pops",
+      "category": "transmission",
+      "text": "Включённая передача самопроизвольно выключается?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 8,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "all": [
+          {
+            "field": "manual",
+            "eq": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "speed_band",
+      "category": "vibration",
+      "text": "Руль вибрирует только в определённом диапазоне скорости без торможения?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 1,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "after_pothole",
+      "category": "vibration",
+      "text": "Вибрация появилась сразу после попадания в яму?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 2,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "pulls",
+      "category": "vibration",
+      "text": "При обычном движении автомобиль тянет в сторону?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 3,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "wheel_crooked",
+      "category": "vibration",
+      "text": "При движении прямо руль стоит криво?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 5,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ],
+      "gate": {
+        "field": "pulls",
+        "eq": true
+      }
+    },
+    {
+      "id": "accel_vibration",
+      "category": "vibration",
+      "text": "Вибрация возникает при разгоне и уменьшается после отпускания газа?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 6,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "pressure",
+      "category": "vibration",
+      "text": "Давление в шинах слева и справа одинаковое?",
+      "hint": "Отвечайте, если давление уже измеряли. Оценка на глаз не заменяет измерение.",
+      "priority": 4,
+      "options": [
+        {
+          "value": "same",
+          "label": "Одинаковое"
+        },
+        {
+          "value": "different",
+          "label": "Различается"
+        }
+      ],
+      "gate": {
+        "field": "pulls",
+        "eq": true
+      }
+    },
+    {
+      "id": "turn_clicks",
+      "category": "noise",
+      "text": "При медленном повороте с нажатым газом слышны повторяющиеся щелчки?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 1,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "hum_changes",
+      "category": "noise",
+      "text": "Гул усиливается со скоростью и меняется при повороте?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 2,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "bumps_knock",
+      "category": "noise",
+      "text": "На неровностях слышен стук?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 3,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "long_sway",
+      "category": "noise",
+      "text": "После неровности кузов долго раскачивается?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 4,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "small_bumps",
+      "category": "noise",
+      "text": "На мелких неровностях слышен частый стук?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 5,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "stationary_squeak",
+      "category": "noise",
+      "text": "При повороте руля на месте слышен скрип со стороны передней подвески?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 6,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "grinding",
+      "category": "brakes",
+      "text": "При торможении слышен металлический скрежет?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 1,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "brake_vibration",
+      "category": "brakes",
+      "text": "При обычном плавном торможении вибрирует руль или педаль?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 2,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "soft_pedal",
+      "category": "brakes",
+      "text": "Педаль стала мягкой и её ход увеличился?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 3,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "pedal_sinks",
+      "category": "brakes",
+      "text": "При удержании педаль тормоза постепенно опускается?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 4,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "brake_pull",
+      "category": "brakes",
+      "text": "Автомобиль тянет в сторону только при торможении?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 5,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "battery_lamp",
+      "category": "electric",
+      "text": "После запуска продолжает гореть лампа аккумулятора?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 1,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "park_discharge",
+      "category": "electric",
+      "text": "Заряженный аккумулятор регулярно разряжается за стоянку при выключенных потребителях?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 2,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "dim_slow",
+      "category": "electric",
+      "text": "При запуске фары сильно тускнеют и стартер вращается медленно?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 3,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "one_headlight",
+      "category": "electric",
+      "text": "Одна фара не горит, а другая работает нормально?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 4,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "several_devices",
+      "category": "electric",
+      "text": "Несколько электрических устройств одновременно перестали работать?",
+      "hint": "Отвечайте по уже замеченным признакам. Если не уверены, выберите «Не знаю».",
+      "priority": 5,
+      "options": [
+        {
+          "value": true,
+          "label": "Да"
+        },
+        {
+          "value": false,
+          "label": "Нет"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": 1,
+      "category": "start",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "complaint",
+            "eq": "start"
+          }
+        ]
+      },
+      "then": {
+        "fact": "start_branch"
+      },
+      "text": "ЕСЛИ двигатель не запускается, ТО перейти к проверке работы стартера."
+    },
+    {
+      "id": 2,
+      "category": "start",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "start_branch",
+            "eq": true
+          },
+          {
+            "field": "starter",
+            "eq": "none"
+          }
+        ]
+      },
+      "then": {
+        "fact": "no_rotation"
+      },
+      "text": "ЕСЛИ стартер не вращает двигатель, ТО перейти к проверке признаков недостаточного питания."
+    },
+    {
+      "id": 3,
+      "category": "start",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "no_rotation",
+            "eq": true
+          },
+          {
+            "field": "dashboard_off",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна разрядка аккумулятора или плохой контакт его клемм",
+        "component": "Аккумулятор и клеммы"
+      },
+      "text": "ЕСЛИ стартер не вращается И при попытке запуска приборная панель гаснет, ТО возможна разрядка аккумулятора или плохой контакт его клемм."
+    },
+    {
+      "id": 4,
+      "category": "start",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "no_rotation",
+            "eq": true
+          },
+          {
+            "field": "click",
+            "eq": true
+          },
+          {
+            "field": "brightness_same",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна неисправность стартера или его силовой цепи",
+        "component": "Стартер и цепь питания"
+      },
+      "text": "ЕСЛИ стартер не вращается И слышен щелчок И яркость приборной панели почти не меняется, ТО возможна неисправность стартера или его силовой цепи."
+    },
+    {
+      "id": 5,
+      "category": "start",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "start_branch",
+            "eq": true
+          },
+          {
+            "field": "starter",
+            "eq": "slow"
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна разрядка аккумулятора или неисправность стартера",
+        "component": "Аккумулятор и стартер"
+      },
+      "text": "ЕСЛИ стартер вращает двигатель заметно медленнее обычного, ТО возможна разрядка аккумулятора или неисправность стартера."
+    },
+    {
+      "id": 6,
+      "category": "start",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "start_branch",
+            "eq": true
+          },
+          {
+            "field": "starter",
+            "eq": "normal"
+          },
+          {
+            "field": "after_empty_refuel",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна проблема с подачей топлива",
+        "component": "Система питания"
+      },
+      "text": "ЕСЛИ стартер вращает двигатель как обычно И после заправки пустого бака двигатель не запускается, ТО возможна проблема с подачей топлива."
+    },
+    {
+      "id": 7,
+      "category": "rough",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "complaint",
+            "eq": "rough"
+          }
+        ]
+      },
+      "then": {
+        "fact": "rough_branch"
+      },
+      "text": "ЕСЛИ двигатель работает неровно, ТО уточнить, когда возникает неровная работа."
+    },
+    {
+      "id": 8,
+      "category": "rough",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "rough_branch",
+            "eq": true
+          },
+          {
+            "field": "idle_only",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "fact": "idle_branch"
+      },
+      "text": "ЕСЛИ двигатель работает неровно только на холостом ходу, ТО перейти к проверке работы на повышенных оборотах."
+    },
+    {
+      "id": 9,
+      "category": "rough",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "idle_branch",
+            "eq": true
+          },
+          {
+            "field": "rpm_fluctuates",
+            "eq": true
+          },
+          {
+            "field": "gas_smooths",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно нарушение регулирования холостого хода",
+        "component": "Система управления двигателем"
+      },
+      "text": "ЕСЛИ на холостом ходу обороты колеблются И при нажатии на газ работа выравнивается, ТО возможно нарушение регулирования холостого хода."
+    },
+    {
+      "id": 10,
+      "category": "rough",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "rough_branch",
+            "eq": true
+          },
+          {
+            "field": "check_flashes",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможны пропуски воспламенения в цилиндрах",
+        "component": "Двигатель и система зажигания"
+      },
+      "text": "ЕСЛИ неровная работа сопровождается миганием лампы Check Engine, ТО возможны пропуски воспламенения в цилиндрах."
+    },
+    {
+      "id": 11,
+      "category": "rough",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "rough_branch",
+            "eq": true
+          },
+          {
+            "field": "stable_rpm",
+            "eq": true
+          },
+          {
+            "field": "body_vibration",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможен износ опор двигателя",
+        "component": "Опоры двигателя"
+      },
+      "text": "ЕСЛИ обороты стабильны И кузов сильно вибрирует на месте, ТО возможен износ опор двигателя."
+    },
+    {
+      "id": 12,
+      "category": "rough",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "rough_branch",
+            "eq": true
+          },
+          {
+            "field": "after_refuel",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно использование некачественного топлива",
+        "component": "Топливо и система питания"
+      },
+      "text": "ЕСЛИ неровная работа появилась сразу после заправки, ТО возможно использование некачественного топлива."
+    },
+    {
+      "id": 13,
+      "category": "stall",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "complaint",
+            "eq": "stall"
+          }
+        ]
+      },
+      "then": {
+        "fact": "stall_branch"
+      },
+      "text": "ЕСЛИ двигатель глохнет, ТО уточнить условия остановки двигателя."
+    },
+    {
+      "id": 14,
+      "category": "stall",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "stall_branch",
+            "eq": true
+          },
+          {
+            "field": "release_gas",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно нарушение регулирования холостого хода",
+        "component": "Система управления двигателем"
+      },
+      "text": "ЕСЛИ двигатель глохнет при отпускании педали газа, ТО возможно нарушение регулирования холостого хода."
+    },
+    {
+      "id": 15,
+      "category": "stall",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "stall_branch",
+            "eq": true
+          },
+          {
+            "field": "brake_stall",
+            "eq": true
+          },
+          {
+            "field": "hiss",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна негерметичность вакуумного усилителя тормозов или его шланга",
+        "component": "Вакуумный усилитель тормозов"
+      },
+      "text": "ЕСЛИ двигатель глохнет при нажатии на тормоз И слышно шипение, ТО возможна негерметичность вакуумного усилителя тормозов или его шланга."
+    },
+    {
+      "id": 16,
+      "category": "stall",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "stall_branch",
+            "eq": true
+          },
+          {
+            "field": "soon_start",
+            "eq": true
+          },
+          {
+            "field": "key_flashes",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна проблема распознавания ключа иммобилайзером",
+        "component": "Иммобилайзер"
+      },
+      "text": "ЕСЛИ двигатель глохнет вскоре после запуска И мигает индикатор ключа, ТО возможна проблема распознавания ключа иммобилайзером."
+    },
+    {
+      "id": 17,
+      "category": "stall",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "stall_branch",
+            "eq": true
+          },
+          {
+            "field": "moving_stall",
+            "eq": true
+          },
+          {
+            "field": "loses_power_jerks",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможны перебои подачи топлива или зажигания",
+        "component": "Система питания и зажигания"
+      },
+      "text": "ЕСЛИ двигатель глохнет на ходу И перед этим теряет мощность и дёргается, ТО возможны перебои подачи топлива или зажигания."
+    },
+    {
+      "id": 18,
+      "category": "stall",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "stall_branch",
+            "eq": true
+          },
+          {
+            "field": "panel_power_lost",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможен плохой контакт в цепи электропитания",
+        "component": "Электропитание"
+      },
+      "text": "ЕСЛИ двигатель глохнет И одновременно пропадает питание приборной панели, ТО возможен плохой контакт в цепи электропитания."
+    },
+    {
+      "id": 19,
+      "category": "exhaust",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "complaint",
+            "eq": "exhaust"
+          }
+        ]
+      },
+      "then": {
+        "fact": "exhaust_branch"
+      },
+      "text": "ЕСЛИ из выхлопной трубы идёт необычный дым или пар, ТО уточнить его цвет."
+    },
+    {
+      "id": 20,
+      "category": "exhaust",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "exhaust_branch",
+            "eq": true
+          },
+          {
+            "field": "smoke_color",
+            "eq": "blue"
+          }
+        ]
+      },
+      "then": {
+        "fact": "blue_branch"
+      },
+      "text": "ЕСЛИ дым сизый, ТО перейти к проверке расхода масла."
+    },
+    {
+      "id": 21,
+      "category": "exhaust",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "blue_branch",
+            "eq": true
+          },
+          {
+            "field": "oil_drops",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно попадание масла в цилиндры",
+        "component": "Двигатель"
+      },
+      "text": "ЕСЛИ дым сизый И уровень масла регулярно снижается, ТО возможно попадание масла в цилиндры."
+    },
+    {
+      "id": 22,
+      "category": "exhaust",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "exhaust_branch",
+            "eq": true
+          },
+          {
+            "field": "smoke_color",
+            "eq": "black"
+          },
+          {
+            "field": "fuel_increased",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно переобогащение топливной смеси",
+        "component": "Система питания"
+      },
+      "text": "ЕСЛИ дым чёрный И расход топлива увеличился, ТО возможно переобогащение топливной смеси."
+    },
+    {
+      "id": 23,
+      "category": "exhaust",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "exhaust_branch",
+            "eq": true
+          },
+          {
+            "field": "smoke_color",
+            "eq": "white"
+          },
+          {
+            "field": "white_persists",
+            "eq": true
+          },
+          {
+            "field": "coolant_drops",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно попадание охлаждающей жидкости в цилиндры",
+        "component": "Двигатель и система охлаждения"
+      },
+      "text": "ЕСЛИ густой белый дым сохраняется после прогрева И уровень охлаждающей жидкости снижается, ТО возможно попадание охлаждающей жидкости в цилиндры."
+    },
+    {
+      "id": 24,
+      "category": "exhaust",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "exhaust_branch",
+            "eq": true
+          },
+          {
+            "field": "smoke_color",
+            "eq": "white"
+          },
+          {
+            "field": "cold_disappears",
+            "eq": true
+          },
+          {
+            "field": "coolant_drops",
+            "eq": false
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно испарение конденсата",
+        "component": "Система выпуска",
+        "kind": "normal_variant"
+      },
+      "text": "ЕСЛИ белый пар появляется только на холодном двигателе И исчезает после прогрева И уровень охлаждающей жидкости не снижается, ТО возможно испарение конденсата."
+    },
+    {
+      "id": 25,
+      "category": "heat",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "complaint",
+            "eq": "heat"
+          }
+        ]
+      },
+      "then": {
+        "fact": "heat_branch"
+      },
+      "text": "ЕСЛИ указатель температуры находится в красной зоне ИЛИ горит индикатор перегрева, ТО перейти к уточнению признаков неисправности системы охлаждения."
+    },
+    {
+      "id": 26,
+      "category": "heat",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "heat_branch",
+            "eq": true
+          },
+          {
+            "field": "traffic_only",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "fact": "traffic_branch"
+      },
+      "text": "ЕСЛИ двигатель перегревается преимущественно в пробке, ТО перейти к уточнению работы вентилятора."
+    },
+    {
+      "id": 27,
+      "category": "heat",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "traffic_branch",
+            "eq": true
+          },
+          {
+            "field": "fan_heard",
+            "eq": false
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна неисправность вентилятора или цепи его управления",
+        "component": "Вентилятор охлаждения"
+      },
+      "text": "ЕСЛИ перегрев возникает в пробке И вентилятор не слышен, ТО возможна неисправность вентилятора или цепи его управления."
+    },
+    {
+      "id": 28,
+      "category": "heat",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "heat_branch",
+            "eq": true
+          },
+          {
+            "field": "coolant_traces",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна утечка в системе охлаждения",
+        "component": "Система охлаждения"
+      },
+      "text": "ЕСЛИ двигатель перегревается И под автомобилем появляются следы охлаждающей жидкости, ТО возможна утечка в системе охлаждения."
+    },
+    {
+      "id": 29,
+      "category": "heat",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "heat_branch",
+            "eq": true
+          },
+          {
+            "field": "heater_cold",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможен недостаток охлаждающей жидкости или нарушение её циркуляции",
+        "component": "Система охлаждения"
+      },
+      "text": "ЕСЛИ температура растёт И отопитель внезапно начинает дуть холодным воздухом, ТО возможен недостаток охлаждающей жидкости или нарушение её циркуляции."
+    },
+    {
+      "id": 30,
+      "category": "heat",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "heat_branch",
+            "eq": true
+          },
+          {
+            "field": "heat_both",
+            "eq": true
+          },
+          {
+            "field": "fan_heard",
+            "eq": true
+          },
+          {
+            "field": "coolant_traces",
+            "eq": false
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно нарушение циркуляции жидкости или отвода тепла",
+        "component": "Система охлаждения"
+      },
+      "text": "ЕСЛИ двигатель перегревается и в пробке, и при движении И вентилятор работает И видимых утечек нет, ТО возможно нарушение циркуляции жидкости или отвода тепла."
+    },
+    {
+      "id": 31,
+      "category": "transmission",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "complaint",
+            "eq": "transmission"
+          },
+          {
+            "field": "manual",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "fact": "transmission_branch"
+      },
+      "text": "ЕСЛИ автомобиль оснащён механической коробкой И возникли проблемы с передачами или троганием, ТО перейти к ветви диагностики сцепления и коробки."
+    },
+    {
+      "id": 32,
+      "category": "transmission",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "transmission_branch",
+            "eq": true
+          },
+          {
+            "field": "rpm_no_speed",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно проскальзывание сцепления",
+        "component": "Сцепление"
+      },
+      "text": "ЕСЛИ при разгоне обороты растут И скорость почти не увеличивается, ТО возможно проскальзывание сцепления."
+    },
+    {
+      "id": 33,
+      "category": "transmission",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "transmission_branch",
+            "eq": true
+          },
+          {
+            "field": "start_jerks",
+            "eq": true
+          },
+          {
+            "field": "engine_smooth",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна неисправность сцепления или опор силового агрегата",
+        "component": "Сцепление и опоры"
+      },
+      "text": "ЕСЛИ при трогании автомобиль дёргается И двигатель работает ровно, ТО возможна неисправность сцепления или опор силового агрегата."
+    },
+    {
+      "id": 34,
+      "category": "transmission",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "transmission_branch",
+            "eq": true
+          },
+          {
+            "field": "gears_hard_running",
+            "eq": true
+          },
+          {
+            "field": "gears_easy_off",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно неполное выключение сцепления",
+        "component": "Сцепление"
+      },
+      "text": "ЕСЛИ при работающем двигателе передачи включаются трудно И при заглушённом включаются легко, ТО возможно неполное выключение сцепления."
+    },
+    {
+      "id": 35,
+      "category": "transmission",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "transmission_branch",
+            "eq": true
+          },
+          {
+            "field": "clutch_noise",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна неисправность выжимного подшипника",
+        "component": "Выжимной подшипник"
+      },
+      "text": "ЕСЛИ шум появляется при нажатии на педаль сцепления И исчезает после её отпускания, ТО возможна неисправность выжимного подшипника."
+    },
+    {
+      "id": 36,
+      "category": "transmission",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "transmission_branch",
+            "eq": true
+          },
+          {
+            "field": "gear_pops",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна неисправность механизма переключения или внутренних деталей коробки",
+        "component": "Механическая коробка передач"
+      },
+      "text": "ЕСЛИ включённая передача самопроизвольно выключается, ТО возможна неисправность механизма переключения или внутренних деталей коробки."
+    },
+    {
+      "id": 37,
+      "category": "vibration",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "complaint",
+            "eq": "vibration"
+          }
+        ]
+      },
+      "then": {
+        "fact": "vibration_branch"
+      },
+      "text": "ЕСЛИ при движении возникает вибрация ИЛИ автомобиль тянет в сторону, ТО уточнить условия проявления."
+    },
+    {
+      "id": 38,
+      "category": "vibration",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "vibration_branch",
+            "eq": true
+          },
+          {
+            "field": "speed_band",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможен дисбаланс колёс",
+        "component": "Колёса"
+      },
+      "text": "ЕСЛИ руль вибрирует только в определённом диапазоне скорости И тормоз не нажат, ТО возможен дисбаланс колёс."
+    },
+    {
+      "id": 39,
+      "category": "vibration",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "vibration_branch",
+            "eq": true
+          },
+          {
+            "field": "after_pothole",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно повреждение шины или колёсного диска",
+        "component": "Шины и колёсные диски"
+      },
+      "text": "ЕСЛИ вибрация появилась сразу после попадания в яму, ТО возможно повреждение шины или колёсного диска."
+    },
+    {
+      "id": 40,
+      "category": "vibration",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "vibration_branch",
+            "eq": true
+          },
+          {
+            "field": "pulls",
+            "eq": true
+          },
+          {
+            "field": "pressure",
+            "eq": "different"
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможной причиной увода является разница давления",
+        "component": "Шины"
+      },
+      "text": "ЕСЛИ автомобиль тянет в сторону И давление в шинах слева и справа различается, ТО возможной причиной увода является разница давления."
+    },
+    {
+      "id": 41,
+      "category": "vibration",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "vibration_branch",
+            "eq": true
+          },
+          {
+            "field": "pulls",
+            "eq": true
+          },
+          {
+            "field": "pressure",
+            "eq": "same"
+          },
+          {
+            "field": "wheel_crooked",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно нарушение углов установки колёс",
+        "component": "Подвеска и рулевое управление"
+      },
+      "text": "ЕСЛИ автомобиль тянет в сторону И давление в шинах одинаковое И руль при прямом движении стоит криво, ТО возможно нарушение углов установки колёс."
+    },
+    {
+      "id": 42,
+      "category": "vibration",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "vibration_branch",
+            "eq": true
+          },
+          {
+            "field": "accel_vibration",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна неисправность приводов колёс или опор силового агрегата",
+        "component": "Приводы колёс и опоры"
+      },
+      "text": "ЕСЛИ вибрация возникает преимущественно при разгоне И уменьшается после отпускания газа, ТО возможна неисправность приводов колёс или опор силового агрегата."
+    },
+    {
+      "id": 43,
+      "category": "noise",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "complaint",
+            "eq": "noise"
+          }
+        ]
+      },
+      "then": {
+        "fact": "noise_branch"
+      },
+      "text": "ЕСЛИ при движении слышен шум со стороны колёс, ТО уточнить, когда он возникает."
+    },
+    {
+      "id": 44,
+      "category": "noise",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "noise_branch",
+            "eq": true
+          },
+          {
+            "field": "turn_clicks",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможен износ наружного ШРУСа",
+        "component": "Наружный ШРУС"
+      },
+      "text": "ЕСЛИ при медленном повороте с нажатым газом слышны повторяющиеся щелчки, ТО возможен износ наружного шруса."
+    },
+    {
+      "id": 45,
+      "category": "noise",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "noise_branch",
+            "eq": true
+          },
+          {
+            "field": "hum_changes",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможен износ ступичного подшипника",
+        "component": "Ступичный подшипник"
+      },
+      "text": "ЕСЛИ гул усиливается с увеличением скорости И меняется при повороте, ТО возможен износ ступичного подшипника."
+    },
+    {
+      "id": 46,
+      "category": "noise",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "noise_branch",
+            "eq": true
+          },
+          {
+            "field": "bumps_knock",
+            "eq": true
+          },
+          {
+            "field": "long_sway",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможен износ амортизаторов",
+        "component": "Амортизаторы"
+      },
+      "text": "ЕСЛИ на неровностях слышен стук И после неровности кузов долго раскачивается, ТО возможен износ амортизаторов."
+    },
+    {
+      "id": 47,
+      "category": "noise",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "noise_branch",
+            "eq": true
+          },
+          {
+            "field": "small_bumps",
+            "eq": true
+          },
+          {
+            "field": "long_sway",
+            "eq": false
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможен износ шарниров или втулок подвески",
+        "component": "Подвеска"
+      },
+      "text": "ЕСЛИ на мелких неровностях слышен частый стук И длительной раскачки кузова нет, ТО возможен износ шарниров или втулок подвески."
+    },
+    {
+      "id": 48,
+      "category": "noise",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "noise_branch",
+            "eq": true
+          },
+          {
+            "field": "stationary_squeak",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможен износ опорного подшипника стойки или шарниров",
+        "component": "Передняя подвеска"
+      },
+      "text": "ЕСЛИ при повороте руля на месте слышен скрип со стороны передней подвески, ТО возможен износ опорного подшипника стойки или шарниров."
+    },
+    {
+      "id": 49,
+      "category": "brakes",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "complaint",
+            "eq": "brakes"
+          }
+        ]
+      },
+      "then": {
+        "fact": "brakes_branch"
+      },
+      "text": "ЕСЛИ необычный звук или изменение поведения автомобиля возникает при торможении, ТО перейти к ветви диагностики тормозов."
+    },
+    {
+      "id": 50,
+      "category": "brakes",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "brakes_branch",
+            "eq": true
+          },
+          {
+            "field": "grinding",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможен сильный износ тормозных колодок",
+        "component": "Тормозные колодки"
+      },
+      "text": "ЕСЛИ при торможении слышен металлический скрежет, ТО возможен сильный износ тормозных колодок."
+    },
+    {
+      "id": 51,
+      "category": "brakes",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "brakes_branch",
+            "eq": true
+          },
+          {
+            "field": "brake_vibration",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна неравномерность рабочих поверхностей тормозных дисков",
+        "component": "Тормозные диски"
+      },
+      "text": "ЕСЛИ руль или педаль вибрируют при обычном плавном торможении, ТО возможна неравномерность рабочих поверхностей тормозных дисков."
+    },
+    {
+      "id": 52,
+      "category": "brakes",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "brakes_branch",
+            "eq": true
+          },
+          {
+            "field": "soft_pedal",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно попадание воздуха в тормозную систему или утечка жидкости",
+        "component": "Гидравлическая тормозная система"
+      },
+      "text": "ЕСЛИ педаль тормоза стала мягкой И её ход увеличился, ТО возможно попадание воздуха в тормозную систему или утечка жидкости."
+    },
+    {
+      "id": 53,
+      "category": "brakes",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "brakes_branch",
+            "eq": true
+          },
+          {
+            "field": "pedal_sinks",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна негерметичность тормозной системы или главного тормозного цилиндра",
+        "component": "Тормозная система и главный цилиндр"
+      },
+      "text": "ЕСЛИ при удержании педали она постепенно опускается, ТО возможна негерметичность тормозной системы или главного тормозного цилиндра."
+    },
+    {
+      "id": 54,
+      "category": "brakes",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "brakes_branch",
+            "eq": true
+          },
+          {
+            "field": "brake_pull",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможно неравномерное действие тормозных механизмов",
+        "component": "Тормозные механизмы"
+      },
+      "text": "ЕСЛИ автомобиль тянет в сторону только при торможении, ТО возможно неравномерное действие тормозных механизмов."
+    },
+    {
+      "id": 55,
+      "category": "electric",
+      "type": "routing",
+      "if": {
+        "all": [
+          {
+            "field": "complaint",
+            "eq": "electric"
+          }
+        ]
+      },
+      "then": {
+        "fact": "electric_branch"
+      },
+      "text": "ЕСЛИ возникли проблемы с освещением или аккумулятором, ТО перейти к ветви диагностики электрооборудования."
+    },
+    {
+      "id": 56,
+      "category": "electric",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "electric_branch",
+            "eq": true
+          },
+          {
+            "field": "battery_lamp",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна неисправность системы зарядки",
+        "component": "Генератор и цепь зарядки"
+      },
+      "text": "ЕСЛИ после запуска двигателя продолжает гореть лампа аккумулятора, ТО возможна неисправность системы зарядки."
+    },
+    {
+      "id": 57,
+      "category": "electric",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "electric_branch",
+            "eq": true
+          },
+          {
+            "field": "park_discharge",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна утечка тока или неисправность аккумулятора",
+        "component": "Аккумулятор и электрические цепи"
+      },
+      "text": "ЕСЛИ заряженный аккумулятор регулярно разряжается за время стоянки И потребители выключены, ТО возможна утечка тока или неисправность аккумулятора."
+    },
+    {
+      "id": 58,
+      "category": "electric",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "electric_branch",
+            "eq": true
+          },
+          {
+            "field": "dim_slow",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна разрядка аккумулятора или плохой контакт силовых соединений",
+        "component": "Аккумулятор и силовые соединения"
+      },
+      "text": "ЕСЛИ при запуске фары сильно тускнеют И стартер вращается медленно, ТО возможна разрядка аккумулятора или плохой контакт силовых соединений."
+    },
+    {
+      "id": 59,
+      "category": "electric",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "electric_branch",
+            "eq": true
+          },
+          {
+            "field": "one_headlight",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна неисправность лампы, разъёма или цепи питания этой фары",
+        "component": "Фара и цепь питания"
+      },
+      "text": "ЕСЛИ одна фара не горит И другая работает нормально, ТО возможна неисправность лампы, разъёма или цепи питания этой фары."
+    },
+    {
+      "id": 60,
+      "category": "electric",
+      "type": "terminal",
+      "if": {
+        "all": [
+          {
+            "field": "electric_branch",
+            "eq": true
+          },
+          {
+            "field": "several_devices",
+            "eq": true
+          }
+        ]
+      },
+      "then": {
+        "conclusion": "Возможна неисправность общей цепи питания или соединения с массой",
+        "component": "Общая цепь питания"
+      },
+      "text": "ЕСЛИ несколько электрических устройств одновременно перестают работать, ТО возможна неисправность общей цепи питания или соединения с массой."
+    }
+  ],
+  "notes": [
+    "Номера 1–60 соответствуют правилам лабораторной 2.",
+    "Вход правила 19 расширен до дыма или пара независимо от прогрева, чтобы правило 24 было достижимо.",
+    "Вопросы с несколькими признаками объединяют условия правила; пользователь может ответить «Не знаю».",
+    "Выводы являются гипотезами. Отсутствие совпадения не означает исправность автомобиля."
+  ],
+  "constraints": [
+    {
+      "if": {
+        "all": [
+          {
+            "field": "white_persists",
+            "eq": true
+          },
+          {
+            "field": "cold_disappears",
+            "eq": true
+          }
+        ]
+      },
+      "message": "Ответы противоречат друг другу: белый дым не может одновременно сохраняться и исчезать после прогрева. Вернитесь и уточните ответ."
+    },
+    {
+      "if": {
+        "all": [
+          {
+            "field": "stable_rpm",
+            "eq": true
+          },
+          {
+            "field": "rpm_fluctuates",
+            "eq": true
+          }
+        ]
+      },
+      "message": "Ответы противоречат друг другу: обороты указаны и как стабильные, и как колеблющиеся. Уточните предыдущие ответы."
+    }
+  ]
+}

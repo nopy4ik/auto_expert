@@ -1,0 +1,936 @@
+[
+  {
+    "id": 1,
+    "name": "Стартер молчит и панель гаснет",
+    "category": "start",
+    "answers": {
+      "starter": "none",
+      "dashboard_off": true,
+      "click": false,
+      "brightness_same": false
+    },
+    "expected": [
+      3
+    ],
+    "status": "matched",
+    "actual": [
+      3
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "starter",
+      "dashboard_off",
+      "click"
+    ],
+    "fired": [
+      1,
+      2,
+      3
+    ],
+    "results": [
+      {
+        "rule_id": 3,
+        "text": "Возможна разрядка аккумулятора или плохой контакт его клемм",
+        "component": "Аккумулятор и клеммы",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ стартер не вращается И при попытке запуска приборная панель гаснет, ТО возможна разрядка аккумулятора или плохой контакт его клемм.",
+        "evidence": [
+          {
+            "id": "starter",
+            "question": "Как стартер вращает двигатель при попытке запуска?",
+            "answer": "Не вращается",
+            "value": "none"
+          },
+          {
+            "id": "dashboard_off",
+            "question": "При попытке запуска приборная панель гаснет?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 2,
+    "name": "Стартер щёлкает при неизменной яркости",
+    "category": "start",
+    "answers": {
+      "starter": "none",
+      "dashboard_off": false,
+      "click": true,
+      "brightness_same": true
+    },
+    "expected": [
+      4
+    ],
+    "status": "matched",
+    "actual": [
+      4
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "starter",
+      "dashboard_off",
+      "click",
+      "brightness_same"
+    ],
+    "fired": [
+      1,
+      2,
+      4
+    ],
+    "results": [
+      {
+        "rule_id": 4,
+        "text": "Возможна неисправность стартера или его силовой цепи",
+        "component": "Стартер и цепь питания",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ стартер не вращается И слышен щелчок И яркость приборной панели почти не меняется, ТО возможна неисправность стартера или его силовой цепи.",
+        "evidence": [
+          {
+            "id": "starter",
+            "question": "Как стартер вращает двигатель при попытке запуска?",
+            "answer": "Не вращается",
+            "value": "none"
+          },
+          {
+            "id": "click",
+            "question": "При попытке запуска слышен щелчок?",
+            "answer": "Да",
+            "value": true
+          },
+          {
+            "id": "brightness_same",
+            "question": "Яркость приборной панели почти не меняется?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 3,
+    "name": "Медленное вращение стартера",
+    "category": "start",
+    "answers": {
+      "starter": "slow"
+    },
+    "expected": [
+      5
+    ],
+    "status": "matched",
+    "actual": [
+      5
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "starter"
+    ],
+    "fired": [
+      1,
+      5
+    ],
+    "results": [
+      {
+        "rule_id": 5,
+        "text": "Возможна разрядка аккумулятора или неисправность стартера",
+        "component": "Аккумулятор и стартер",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ стартер вращает двигатель заметно медленнее обычного, ТО возможна разрядка аккумулятора или неисправность стартера.",
+        "evidence": [
+          {
+            "id": "starter",
+            "question": "Как стартер вращает двигатель при попытке запуска?",
+            "answer": "Вращается медленно",
+            "value": "slow"
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 4,
+    "name": "Неизвестно поведение стартера",
+    "category": "start",
+    "answers": {
+      "starter": null
+    },
+    "expected": [],
+    "status": "insufficient",
+    "actual": [],
+    "actual_status": "insufficient",
+    "asked": [
+      "starter"
+    ],
+    "fired": [
+      1
+    ],
+    "results": [],
+    "passed": true
+  },
+  {
+    "id": 5,
+    "name": "Колебания оборотов только на холостом ходу",
+    "category": "rough",
+    "answers": {
+      "idle_only": true,
+      "rpm_fluctuates": true,
+      "gas_smooths": true,
+      "check_flashes": false,
+      "stable_rpm": false,
+      "body_vibration": false,
+      "after_refuel": false
+    },
+    "expected": [
+      9
+    ],
+    "status": "matched",
+    "actual": [
+      9
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "idle_only",
+      "rpm_fluctuates",
+      "gas_smooths",
+      "check_flashes",
+      "stable_rpm",
+      "after_refuel"
+    ],
+    "fired": [
+      7,
+      8,
+      9
+    ],
+    "results": [
+      {
+        "rule_id": 9,
+        "text": "Возможно нарушение регулирования холостого хода",
+        "component": "Система управления двигателем",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ на холостом ходу обороты колеблются И при нажатии на газ работа выравнивается, ТО возможно нарушение регулирования холостого хода.",
+        "evidence": [
+          {
+            "id": "idle_only",
+            "question": "Неровная работа возникает только на холостом ходу?",
+            "answer": "Да",
+            "value": true
+          },
+          {
+            "id": "rpm_fluctuates",
+            "question": "Обороты на холостом ходу колеблются?",
+            "answer": "Да",
+            "value": true
+          },
+          {
+            "id": "gas_smooths",
+            "question": "При нажатии на газ двигатель работает ровнее?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 6,
+    "name": "Остановка двигателя после запуска с индикатором ключа",
+    "category": "stall",
+    "answers": {
+      "release_gas": false,
+      "brake_stall": false,
+      "soon_start": true,
+      "key_flashes": true,
+      "moving_stall": false,
+      "panel_power_lost": false
+    },
+    "expected": [
+      16
+    ],
+    "status": "matched",
+    "actual": [
+      16
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "release_gas",
+      "brake_stall",
+      "soon_start",
+      "key_flashes",
+      "moving_stall",
+      "panel_power_lost"
+    ],
+    "fired": [
+      13,
+      16
+    ],
+    "results": [
+      {
+        "rule_id": 16,
+        "text": "Возможна проблема распознавания ключа иммобилайзером",
+        "component": "Иммобилайзер",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ двигатель глохнет вскоре после запуска И мигает индикатор ключа, ТО возможна проблема распознавания ключа иммобилайзером.",
+        "evidence": [
+          {
+            "id": "soon_start",
+            "question": "Двигатель глохнет вскоре после запуска?",
+            "answer": "Да",
+            "value": true
+          },
+          {
+            "id": "key_flashes",
+            "question": "При этом мигает индикатор ключа?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 7,
+    "name": "Сизый дым и снижение уровня масла",
+    "category": "exhaust",
+    "answers": {
+      "smoke_color": "blue",
+      "oil_drops": true
+    },
+    "expected": [
+      21
+    ],
+    "status": "matched",
+    "actual": [
+      21
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "smoke_color",
+      "oil_drops"
+    ],
+    "fired": [
+      19,
+      20,
+      21
+    ],
+    "results": [
+      {
+        "rule_id": 21,
+        "text": "Возможно попадание масла в цилиндры",
+        "component": "Двигатель",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ дым сизый И уровень масла регулярно снижается, ТО возможно попадание масла в цилиндры.",
+        "evidence": [
+          {
+            "id": "smoke_color",
+            "question": "Какого цвета дым или пар?",
+            "answer": "Сизый / синеватый",
+            "value": "blue"
+          },
+          {
+            "id": "oil_drops",
+            "question": "Вы уже замечали, что уровень масла регулярно снижается?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 8,
+    "name": "Белый пар исчезает после прогрева",
+    "category": "exhaust",
+    "answers": {
+      "smoke_color": "white",
+      "white_persists": false,
+      "coolant_drops": false,
+      "cold_disappears": true
+    },
+    "expected": [
+      24
+    ],
+    "status": "matched",
+    "actual": [
+      24
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "smoke_color",
+      "white_persists",
+      "coolant_drops",
+      "cold_disappears"
+    ],
+    "fired": [
+      19,
+      24
+    ],
+    "results": [
+      {
+        "rule_id": 24,
+        "text": "Возможно испарение конденсата",
+        "component": "Система выпуска",
+        "kind": "normal_variant",
+        "rule_text": "ЕСЛИ белый пар появляется только на холодном двигателе И исчезает после прогрева И уровень охлаждающей жидкости не снижается, ТО возможно испарение конденсата.",
+        "evidence": [
+          {
+            "id": "smoke_color",
+            "question": "Какого цвета дым или пар?",
+            "answer": "Белый",
+            "value": "white"
+          },
+          {
+            "id": "coolant_drops",
+            "question": "Вы уже замечали снижение уровня охлаждающей жидкости?",
+            "answer": "Нет",
+            "value": false
+          },
+          {
+            "id": "cold_disappears",
+            "question": "Белый пар появляется только на холодном двигателе и исчезает после прогрева?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 9,
+    "name": "Перегрев в пробке без слышимой работы вентилятора",
+    "category": "heat",
+    "answers": {
+      "traffic_only": true,
+      "fan_heard": false,
+      "coolant_traces": false,
+      "heater_cold": false,
+      "heat_both": false
+    },
+    "expected": [
+      27
+    ],
+    "status": "matched",
+    "actual": [
+      27
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "traffic_only",
+      "fan_heard",
+      "coolant_traces",
+      "heater_cold"
+    ],
+    "fired": [
+      25,
+      26,
+      27
+    ],
+    "results": [
+      {
+        "rule_id": 27,
+        "text": "Возможна неисправность вентилятора или цепи его управления",
+        "component": "Вентилятор охлаждения",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ перегрев возникает в пробке И вентилятор не слышен, ТО возможна неисправность вентилятора или цепи его управления.",
+        "evidence": [
+          {
+            "id": "traffic_only",
+            "question": "Перегрев возникает преимущественно в пробке?",
+            "answer": "Да",
+            "value": true
+          },
+          {
+            "id": "fan_heard",
+            "question": "Вы слышали работу вентилятора охлаждения при перегреве?",
+            "answer": "Нет",
+            "value": false
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 10,
+    "name": "Пробуксовка сцепления на механической коробке",
+    "category": "transmission",
+    "answers": {
+      "manual": true,
+      "rpm_no_speed": true,
+      "start_jerks": false,
+      "gears_hard_running": false,
+      "clutch_noise": false,
+      "gear_pops": false
+    },
+    "expected": [
+      32
+    ],
+    "status": "matched",
+    "actual": [
+      32
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "manual",
+      "rpm_no_speed",
+      "start_jerks",
+      "gears_hard_running",
+      "clutch_noise",
+      "gear_pops"
+    ],
+    "fired": [
+      31,
+      32
+    ],
+    "results": [
+      {
+        "rule_id": 32,
+        "text": "Возможно проскальзывание сцепления",
+        "component": "Сцепление",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ при разгоне обороты растут И скорость почти не увеличивается, ТО возможно проскальзывание сцепления.",
+        "evidence": [
+          {
+            "id": "manual",
+            "question": "На автомобиле механическая коробка передач?",
+            "answer": "Да",
+            "value": true
+          },
+          {
+            "id": "rpm_no_speed",
+            "question": "При разгоне обороты растут, а скорость почти не увеличивается?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 11,
+    "name": "Автоматическая коробка вне области ветви",
+    "category": "transmission",
+    "answers": {
+      "manual": false
+    },
+    "expected": [],
+    "status": "no_match",
+    "actual": [],
+    "actual_status": "no_match",
+    "asked": [
+      "manual"
+    ],
+    "fired": [],
+    "results": [],
+    "passed": true
+  },
+  {
+    "id": 12,
+    "name": "Увод при разном давлении в шинах",
+    "category": "vibration",
+    "answers": {
+      "speed_band": false,
+      "after_pothole": false,
+      "pulls": true,
+      "pressure": "different",
+      "wheel_crooked": false,
+      "accel_vibration": false
+    },
+    "expected": [
+      40
+    ],
+    "status": "matched",
+    "actual": [
+      40
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "speed_band",
+      "after_pothole",
+      "pulls",
+      "pressure",
+      "accel_vibration"
+    ],
+    "fired": [
+      37,
+      40
+    ],
+    "results": [
+      {
+        "rule_id": 40,
+        "text": "Возможной причиной увода является разница давления",
+        "component": "Шины",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ автомобиль тянет в сторону И давление в шинах слева и справа различается, ТО возможной причиной увода является разница давления.",
+        "evidence": [
+          {
+            "id": "pulls",
+            "question": "При обычном движении автомобиль тянет в сторону?",
+            "answer": "Да",
+            "value": true
+          },
+          {
+            "id": "pressure",
+            "question": "Давление в шинах слева и справа одинаковое?",
+            "answer": "Различается",
+            "value": "different"
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 13,
+    "name": "Гул со скоростью и изменением при повороте",
+    "category": "noise",
+    "answers": {
+      "turn_clicks": false,
+      "hum_changes": true,
+      "bumps_knock": false,
+      "long_sway": false,
+      "small_bumps": false,
+      "stationary_squeak": false
+    },
+    "expected": [
+      45
+    ],
+    "status": "matched",
+    "actual": [
+      45
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "turn_clicks",
+      "hum_changes",
+      "bumps_knock",
+      "long_sway",
+      "small_bumps",
+      "stationary_squeak"
+    ],
+    "fired": [
+      43,
+      45
+    ],
+    "results": [
+      {
+        "rule_id": 45,
+        "text": "Возможен износ ступичного подшипника",
+        "component": "Ступичный подшипник",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ гул усиливается с увеличением скорости И меняется при повороте, ТО возможен износ ступичного подшипника.",
+        "evidence": [
+          {
+            "id": "hum_changes",
+            "question": "Гул усиливается со скоростью и меняется при повороте?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 14,
+    "name": "Металлический скрежет при торможении",
+    "category": "brakes",
+    "answers": {
+      "grinding": true,
+      "brake_vibration": false,
+      "soft_pedal": false,
+      "pedal_sinks": false,
+      "brake_pull": false
+    },
+    "expected": [
+      50
+    ],
+    "status": "matched",
+    "actual": [
+      50
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "grinding",
+      "brake_vibration",
+      "soft_pedal",
+      "pedal_sinks",
+      "brake_pull"
+    ],
+    "fired": [
+      49,
+      50
+    ],
+    "results": [
+      {
+        "rule_id": 50,
+        "text": "Возможен сильный износ тормозных колодок",
+        "component": "Тормозные колодки",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ при торможении слышен металлический скрежет, ТО возможен сильный износ тормозных колодок.",
+        "evidence": [
+          {
+            "id": "grinding",
+            "question": "При торможении слышен металлический скрежет?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 15,
+    "name": "Несколько гипотез для тормозной системы",
+    "category": "brakes",
+    "answers": {
+      "grinding": false,
+      "brake_vibration": false,
+      "soft_pedal": true,
+      "pedal_sinks": true,
+      "brake_pull": false
+    },
+    "expected": [
+      52,
+      53
+    ],
+    "status": "matched",
+    "actual": [
+      52,
+      53
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "grinding",
+      "brake_vibration",
+      "soft_pedal",
+      "pedal_sinks",
+      "brake_pull"
+    ],
+    "fired": [
+      49,
+      52,
+      53
+    ],
+    "results": [
+      {
+        "rule_id": 52,
+        "text": "Возможно попадание воздуха в тормозную систему или утечка жидкости",
+        "component": "Гидравлическая тормозная система",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ педаль тормоза стала мягкой И её ход увеличился, ТО возможно попадание воздуха в тормозную систему или утечка жидкости.",
+        "evidence": [
+          {
+            "id": "soft_pedal",
+            "question": "Педаль стала мягкой и её ход увеличился?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      },
+      {
+        "rule_id": 53,
+        "text": "Возможна негерметичность тормозной системы или главного тормозного цилиндра",
+        "component": "Тормозная система и главный цилиндр",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ при удержании педали она постепенно опускается, ТО возможна негерметичность тормозной системы или главного тормозного цилиндра.",
+        "evidence": [
+          {
+            "id": "pedal_sinks",
+            "question": "При удержании педаль тормоза постепенно опускается?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 16,
+    "name": "Тормозные признаки не совпали с правилами",
+    "category": "brakes",
+    "answers": {
+      "grinding": false,
+      "brake_vibration": false,
+      "soft_pedal": false,
+      "pedal_sinks": false,
+      "brake_pull": false
+    },
+    "expected": [],
+    "status": "no_match",
+    "actual": [],
+    "actual_status": "no_match",
+    "asked": [
+      "grinding",
+      "brake_vibration",
+      "soft_pedal",
+      "pedal_sinks",
+      "brake_pull"
+    ],
+    "fired": [
+      49
+    ],
+    "results": [],
+    "passed": true
+  },
+  {
+    "id": 17,
+    "name": "После запуска горит лампа аккумулятора",
+    "category": "electric",
+    "answers": {
+      "battery_lamp": true,
+      "park_discharge": false,
+      "dim_slow": false,
+      "one_headlight": false,
+      "several_devices": false
+    },
+    "expected": [
+      56
+    ],
+    "status": "matched",
+    "actual": [
+      56
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "battery_lamp",
+      "park_discharge",
+      "dim_slow",
+      "one_headlight",
+      "several_devices"
+    ],
+    "fired": [
+      55,
+      56
+    ],
+    "results": [
+      {
+        "rule_id": 56,
+        "text": "Возможна неисправность системы зарядки",
+        "component": "Генератор и цепь зарядки",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ после запуска двигателя продолжает гореть лампа аккумулятора, ТО возможна неисправность системы зарядки.",
+        "evidence": [
+          {
+            "id": "battery_lamp",
+            "question": "После запуска продолжает гореть лампа аккумулятора?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "id": 18,
+    "name": "Неизвестно, опускается ли педаль тормоза",
+    "category": "brakes",
+    "answers": {
+      "grinding": false,
+      "brake_vibration": false,
+      "soft_pedal": false,
+      "pedal_sinks": null,
+      "brake_pull": false
+    },
+    "expected": [],
+    "status": "insufficient",
+    "actual": [],
+    "actual_status": "insufficient",
+    "asked": [
+      "grinding",
+      "brake_vibration",
+      "soft_pedal",
+      "pedal_sinks",
+      "brake_pull"
+    ],
+    "fired": [
+      49
+    ],
+    "results": [],
+    "passed": true
+  },
+  {
+    "id": 19,
+    "name": "Нормальное вращение без дополнительного признака",
+    "category": "start",
+    "answers": {
+      "starter": "normal",
+      "after_empty_refuel": false
+    },
+    "expected": [],
+    "status": "no_match",
+    "actual": [],
+    "actual_status": "no_match",
+    "asked": [
+      "starter",
+      "after_empty_refuel"
+    ],
+    "fired": [
+      1
+    ],
+    "results": [],
+    "passed": true
+  },
+  {
+    "id": 20,
+    "name": "Одна фара не работает",
+    "category": "electric",
+    "answers": {
+      "battery_lamp": false,
+      "park_discharge": false,
+      "dim_slow": false,
+      "one_headlight": true,
+      "several_devices": false
+    },
+    "expected": [
+      59
+    ],
+    "status": "matched",
+    "actual": [
+      59
+    ],
+    "actual_status": "matched",
+    "asked": [
+      "battery_lamp",
+      "park_discharge",
+      "dim_slow",
+      "one_headlight",
+      "several_devices"
+    ],
+    "fired": [
+      55,
+      59
+    ],
+    "results": [
+      {
+        "rule_id": 59,
+        "text": "Возможна неисправность лампы, разъёма или цепи питания этой фары",
+        "component": "Фара и цепь питания",
+        "kind": "hypothesis",
+        "rule_text": "ЕСЛИ одна фара не горит И другая работает нормально, ТО возможна неисправность лампы, разъёма или цепи питания этой фары.",
+        "evidence": [
+          {
+            "id": "one_headlight",
+            "question": "Одна фара не горит, а другая работает нормально?",
+            "answer": "Да",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "passed": true
+  }
+]
