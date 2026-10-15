@@ -4,13 +4,37 @@ import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
-from engine import ExpertSystem
+from rule_editor import ConflictError, RuleStore
 
 ROOT = Path(__file__).resolve().parent
-SYSTEM = ExpertSystem()
+STORE = RuleStore(ROOT / 'data' / 'knowledge.json')
 
 
 class Handler(BaseHTTPRequestHandler):
+    def read_json(self, require_type=False):
+        if require_type and self.headers.get('Content-Type', '').split(';')[0].strip().lower() != 'application/json':
+            raise ValueError('Требуется Content-Type: application/json')
+        size = int(self.headers.get('Content-Length', '0'))
+        if not 0 < size <= 65536:
+            raise ValueError('Размер запроса недопустим')
+        data = json.loads(self.rfile.read(size))
+        if not isinstance(data, dict):
+            raise ValueError('Ожидается объект JSON')
+        return data
+
+    def check_origin(self):
+        origin = self.headers.get('Origin')
+        expected = f'http://{self.headers.get("Host")}'
+        if origin and (origin != expected or not self.headers.get('Host', '').startswith('127.0.0.1:')):
+            raise ValueError('Редактирование разрешено только из локального приложения')
+
+    @staticmethod
+    def knowledge_response():
+        system, revision = STORE.snapshot()
+        return {'categories': system.kb['categories'], 'questions': system.kb['questions'],
+                'rules': system.rules, 'rule_count': len(system.rules),
+                'version': system.kb['version'], 'revision': revision}
+
     def send_json(self, data, status=200):
         payload = json.dumps(data, ensure_ascii=False).encode('utf-8')
         self.send_response(status)
@@ -23,8 +47,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = urlsplit(self.path).path
         if path == '/api/knowledge':
-            return self.send_json({'categories': SYSTEM.kb['categories'], 'rules': SYSTEM.rules,
-                                   'rule_count': len(SYSTEM.rules), 'version': SYSTEM.kb['version']})
+            return self.send_json(self.knowledge_response())
         files = {'/': ('index.html', 'text/html'), '/style.css': ('style.css', 'text/css'),
                  '/app.js': ('app.js', 'text/javascript')}
         if path not in files:
@@ -39,19 +62,45 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(payload)
 
     def do_POST(self):
-        if urlsplit(self.path).path != '/api/consult':
+        path = urlsplit(self.path).path
+        if path == '/api/rules':
+            return self.change_rule('create')
+        if path != '/api/consult':
             return self.send_json({'error': 'Метод не найден'}, 404)
         try:
-            size = int(self.headers.get('Content-Length', '0'))
-            if not 0 < size <= 65536:
-                raise ValueError('Размер запроса недопустим')
-            data = json.loads(self.rfile.read(size))
-            if not isinstance(data, dict):
-                raise ValueError('Ожидается объект JSON')
-            result = SYSTEM.consult(data.get('category'), data.get('answers', {}))
+            data = self.read_json()
+            system, _ = STORE.snapshot()
+            result = system.consult(data.get('category'), data.get('answers', {}))
         except (ValueError, TypeError, KeyError, UnicodeDecodeError) as error:
             return self.send_json({'error': str(error)}, 400)
         self.send_json(result)
+
+    def do_PUT(self):
+        return self.change_rule('update')
+
+    def do_DELETE(self):
+        return self.change_rule('delete')
+
+    def change_rule(self, action):
+        path = urlsplit(self.path).path
+        if action == 'create':
+            if path != '/api/rules':
+                return self.send_json({'error': 'Метод не найден'}, 404)
+        elif not path.startswith('/api/rules/') or not path[len('/api/rules/'):].isdigit():
+            return self.send_json({'error': 'Правило не найдено'}, 404)
+        try:
+            self.check_origin()
+            data = self.read_json(require_type=True)
+            rule = data.get('rule')
+            rule_id = rule.get('id') if action == 'create' and isinstance(rule, dict) else int(path.rsplit('/', 1)[-1]) if action != 'create' else None
+            if type(rule_id) is not int:
+                raise ValueError('Номер правила должен быть целым числом')
+            STORE.change(action, rule_id, rule, data.get('revision'))
+        except ConflictError as error:
+            return self.send_json({'error': str(error)}, 409)
+        except (ValueError, TypeError, KeyError, UnicodeDecodeError) as error:
+            return self.send_json({'error': str(error)}, 400)
+        self.send_json(self.knowledge_response())
 
 
 def main():

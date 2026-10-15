@@ -9,12 +9,12 @@
   <header><a class="brand" href="/" aria-label="На главную"><span class="brand-mark" aria-hidden="true">А</span>Автодиагностика</a><button id="knowledge-toggle" class="text-button">База знаний</button></header>
   <main id="app" tabindex="-1"></main>
   <div id="error" role="alert" hidden></div>
-  <footer>Учебная экспертная система · Предварительная диагностика по наблюдаемым признакам</footer>
   <dialog id="knowledge-dialog" aria-labelledby="knowledge-title">
     <div class="dialog-header"><h2 id="knowledge-title">База знаний</h2><button id="close-dialog" class="text-button">Закрыть</button></div>
-    <p>60 правил. Промежуточные правила выбирают ветку; конечные описывают возможную причину.</p>
-    <label class="search-label">Поиск по правилам<input id="rule-search" type="search" placeholder="Например, сцепление"></label>
-    <div id="rule-list"></div>
+    <p class="knowledge-intro">Узлы показывают правила, линии — зависимости между ними. Выберите раздел и проследите путь от жалобы до возможных причин.</p>
+    <div class="graph-controls"><label>Раздел<select id="graph-category"></select></label><label>Поиск в разделе<input id="rule-search" type="search" placeholder="Правило, признак или узел"></label></div>
+    <div class="graph-meta"><div class="tree-legend"><span><i class="legend-dot routing-dot"></i> Переход</span><span><i class="legend-dot terminal-dot"></i> Возможная причина</span></div><div class="graph-tools"><div class="zoom-controls" aria-label="Масштаб графа"><button id="zoom-out" aria-label="Уменьшить масштаб">−</button><output id="zoom-value">100%</output><button id="zoom-in" aria-label="Увеличить масштаб">+</button><button id="zoom-reset">Сбросить</button></div></div></div>
+    <div id="rule-list" class="graph-viewport"></div>
   </dialog>
 </body>
 </html>

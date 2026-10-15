@@ -7,7 +7,16 @@ UNKNOWN = None
 
 class ExpertSystem:
     def __init__(self, path=None):
-        self.kb = json.loads(Path(path or Path(__file__).parent / 'data/knowledge.json').read_text(encoding='utf-8'))
+        self._initialize(json.loads(Path(path or Path(__file__).parent / 'data/knowledge.json').read_text(encoding='utf-8')))
+
+    @classmethod
+    def from_data(cls, data):
+        system = cls.__new__(cls)
+        system._initialize(data)
+        return system
+
+    def _initialize(self, data):
+        self.kb = data
         self.questions = {q['id']: q for q in self.kb['questions']}
         self.categories = {c['id']: c for c in self.kb['categories']}
         self.rules = self.kb['rules']
@@ -111,7 +120,8 @@ class ExpertSystem:
                 'rule_id': rule['id'], 'text': rule['then']['conclusion'],
                 'component': rule['then']['component'], 'kind': rule['then'].get('kind', 'hypothesis'),
                 'rule_text': rule['text'],
-                'evidence': [self.answer_record(k, answers[k]) for k in self.questions if k in used and k in answers]
+                'evidence': [self.answer_record(k, answers[k]) for k in self.questions if k in used and k in answers],
+                'trace': self.explain(rule, facts)
             })
         status = 'question' if question else ('matched' if results else ('insufficient' if pending else 'no_match'))
         return {
@@ -127,6 +137,43 @@ class ExpertSystem:
                 'no_match': 'В базе нет правила для указанного сочетания признаков.'
             }[status]
         }
+
+    def explain(self, rule, facts):
+        """Возвращает только фактически подтверждённые шаги вывода в порядке зависимостей."""
+        steps = []
+        seen = set()
+
+        def add(key, item):
+            if key not in seen:
+                seen.add(key)
+                steps.append(item)
+
+        def visit(condition):
+            if 'all' in condition:
+                for part in condition['all']:
+                    visit(part)
+            elif 'any' in condition:
+                for part in condition['any']:
+                    if self.evaluate(part, facts) is True:
+                        visit(part)
+            else:
+                field = condition['field']
+                if field == 'complaint':
+                    add(('complaint', field), {'type': 'complaint', 'text': self.categories[facts[field]]['title']})
+                elif field in self.questions:
+                    answer = self.answer_record(field, facts[field])
+                    add(('answer', field), {'type': 'answer', 'question': answer['question'], 'answer': answer['answer']})
+                else:
+                    visit_rule(self.producers[field])
+
+        def visit_rule(item):
+            if ('rule', item['id']) in seen:
+                return
+            visit(item['if'])
+            add(('rule', item['id']), {'type': 'rule', 'rule_id': item['id'], 'text': item['text']})
+
+        visit_rule(rule)
+        return steps
 
     def answer_record(self, field, value):
         q = self.questions[field]
